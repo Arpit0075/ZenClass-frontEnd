@@ -18,7 +18,9 @@ function Students() {
   useEffect(() => {
     const getStudents = async () => {
       try {
-        const res = await fetch("http://localhost:3001/students");
+        const res = await fetch(
+          "https://zenclass-backend.herokuapp.com/students"
+        );
         const data = await res.json();
         //console.log(data);
         setStudents(data);
@@ -34,17 +36,20 @@ function Students() {
     setStudent((prev) => ({ ...prev, [name]: value }));
   };
 
-  //posting data from front end to back end
+  //posting data from front end to back end,creating student
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch("http://localhost:3001/students", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(student),
-    });
+    const response = await fetch(
+      "https://zenclass-backend.herokuapp.com/students",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(student),
+      }
+    );
     //this is the response from backend
     const data = await response.json();
     // now do whatever you want with the data

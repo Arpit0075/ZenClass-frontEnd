@@ -6,14 +6,15 @@ function Student({ match }) {
   const [mentors] = useContext(MentorsContext);
   const [assignedMentor, setAssignedMentor] = useState({});
 
-  //console.log(mentors);
   //getting specific student data from backend using id
   useEffect(() => {
     try {
       const id = match.params.id;
       //console.log(id);
       const getData = async () => {
-        const res = await fetch(`http://localhost:3001/students/${id}`);
+        const res = await fetch(
+          `https://zenclass-backend.herokuapp.com/students/${id}`
+        );
         const data = await res.json();
         //console.log(data);
         setStudent(data);
@@ -37,7 +38,7 @@ function Student({ match }) {
     e.preventDefault();
     //console.log(assignedMentor);
     const response = await fetch(
-      `http://localhost:3001/students/${match.params.id}`,
+      `https://zenclass-backend.herokuapp.com/students/${match.params.id}`,
       {
         method: "PUT",
         headers: {

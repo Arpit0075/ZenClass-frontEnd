@@ -18,7 +18,9 @@ function Mentors() {
   useEffect(() => {
     const getMentors = async () => {
       try {
-        const res = await fetch("http://localhost:3001/mentors");
+        const res = await fetch(
+          "https://zenclass-backend.herokuapp.com/mentors"
+        );
         const data = await res.json();
         //console.log(data);
         setMentors(data);
@@ -40,13 +42,16 @@ function Mentors() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //console.log(mentor);
-    const response = await fetch("http://localhost:3001/mentors", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(mentor),
-    });
+    const response = await fetch(
+      "https://zenclass-backend.herokuapp.com/mentors",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(mentor),
+      }
+    );
 
     //response from backend
     const data = await response.json();

@@ -8,7 +8,9 @@ export const MentorsProvider = (props) => {
   useEffect(() => {
     const getMentors = async () => {
       try {
-        const res = await fetch("http://localhost:3001/mentors");
+        const res = await fetch(
+          "https://zenclass-backend.herokuapp.com/mentors"
+        );
         const data = await res.json();
         // console.log(data);
         setMentors(data);

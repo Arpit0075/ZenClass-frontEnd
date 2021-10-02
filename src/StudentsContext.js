@@ -8,7 +8,9 @@ export const StudentsProvider = (props) => {
   useEffect(() => {
     const getStudents = async () => {
       try {
-        const res = await fetch("http://localhost:3001/students");
+        const res = await fetch(
+          "https://zenclass-backend.herokuapp.com/students"
+        );
         const data = await res.json();
         // console.log(data);
         setStudents(data);

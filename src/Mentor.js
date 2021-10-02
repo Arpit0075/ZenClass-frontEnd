@@ -10,7 +10,9 @@ function Mentor({ match }) {
   useEffect(() => {
     const getStudents = async () => {
       try {
-        const res = await fetch("http://localhost:3001/students");
+        const res = await fetch(
+          "https://zenclass-backend.herokuapp.com/students"
+        );
         const data = await res.json();
         //console.log(data);
         //filtering students based on who doesn;t have mentor
@@ -36,7 +38,9 @@ function Mentor({ match }) {
       const id = match.params.id;
       //console.log(id);
       const getData = async () => {
-        const res = await fetch(`http://localhost:3001/mentors/${id}`);
+        const res = await fetch(
+          `https://zenclass-backend.herokuapp.com/mentors/${id}`
+        );
         const data = await res.json();
         //console.log(data);
         setMentor(data);
@@ -63,7 +67,7 @@ function Mentor({ match }) {
     console.log(assignedStudent.name);
 
     const response = await fetch(
-      `http://localhost:3001/mentors/${match.params.id}`,
+      `https://zenclass-backend.herokuapp.com/mentors/${match.params.id}`,
       {
         method: "PUT",
         headers: {
