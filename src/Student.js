@@ -27,17 +27,22 @@ function Student({ match }) {
   }, []);
 
   //handling chnage select
-  const handleChange = (e) => {
+  const handleClick = (e) => {
     let data = mentors.find((mentor) => mentor._id === e.target.value);
     setAssignedMentor(data);
     //console.log(data);
   };
 
-  //updating/changing mentor put request
+  //assign/update mentor inside student database
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //console.log(assignedMentor);
-    const response = await fetch(
+    console.log(assignedMentor);
+
+    //let local_Url = "http://localhost:3001";
+    //let cloud_Url = "https://zenclass-backend.herokuapp.com/";
+
+    //updating/changing mentor put request
+    const response1 = await fetch(
       `https://zenclass-backend.herokuapp.com/students/${match.params.id}`,
       {
         method: "PUT",
@@ -47,9 +52,29 @@ function Student({ match }) {
         body: JSON.stringify(assignedMentor),
       }
     );
-    let data = await response.json();
+    let data1 = await response1.json();
     //now do whatever you want with the data
-    console.log(data);
+    console.log(data1);
+
+    //update the mentor database,assign the student
+    updateMentor();
+  };
+
+  //update mentor after updating the student
+  const updateMentor = async () => {
+    const response2 = await fetch(
+      `https://zenclass-backend.herokuapp.com/mentors/${assignedMentor._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(student),
+      }
+    );
+    let data2 = await response2.json();
+    //now do whatever you want with the data
+    console.log(data2);
   };
 
   return (
@@ -58,7 +83,7 @@ function Student({ match }) {
       <h2>Name: {student.name}</h2>
       <p>Email: {student.email}</p>
       <p>Mentor: {student.mentor} </p>
-      <select onChange={handleChange}>
+      <select onClick={handleClick}>
         {mentors.map((mentor) => {
           return (
             <>

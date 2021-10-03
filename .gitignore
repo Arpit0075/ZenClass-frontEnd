@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# my owm file
+read.txt
+
 # testing
 /coverage
 
