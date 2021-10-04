@@ -4,8 +4,6 @@ function Mentor({ match }) {
   let [students, setStudents] = useState([]);
   const [mentor, setMentor] = useState([]);
 
-  // id for passing
-
   //getting students data
   useEffect(() => {
     const getStudents = async () => {
@@ -110,7 +108,16 @@ function Mentor({ match }) {
         <h1>Mentor detail</h1>
         <h2>Name: {mentor.name}</h2>
         <p>Email: {mentor.email}</p>
-        <p>Students Under: {mentor.students} </p>
+        <p>Students Under:</p>
+        {mentor.students
+          ? mentor.students.map((el) => {
+              return (
+                <>
+                  <li>{el}</li>
+                </>
+              );
+            })
+          : ""}
 
         {/* form for assigning mentor to students */}
         <h2>Assign students </h2>
